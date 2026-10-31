@@ -1,0 +1,16 @@
+name: Validate research instrument
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: node --check engine.js && node --check tests/engine.test.js
+      - name: Deterministic mechanism gates
+        run: node tests/engine.test.js
