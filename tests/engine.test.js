@@ -2,6 +2,7 @@
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const path=require("node:path");
+const vm=require("node:vm");
 const E=require("../engine.js");
 function close(a,b,tol=1e-10){assert.ok(Math.abs(a-b)<tol,"expected "+a+" ~ "+b);}
 function run(){
@@ -58,6 +59,9 @@ function run(){
  assert.ok(Math.abs(result.brier-ablated.brier)>1e-6,"ablation must change scored model");
  const index=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8");
  assert.ok(index.includes('src="engine.js"'));
+ const inline=index.match(/<script>([\s\S]*?)<\/script>/);
+ assert.ok(inline,"inline browser application exists");
+ new vm.Script(inline[1],{filename:"index.html:inline"});
  assert.ok(index.includes("mask14")&&index.includes("cutRead"));
  console.log(JSON.stringify({status:"PASS",checks:check,intact:result,erased:ablated},null,2));
 }
