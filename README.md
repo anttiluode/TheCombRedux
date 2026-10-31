@@ -69,6 +69,10 @@ Training learns readout weights and operator parameters. It does **not** train t
 - **No incorrectly signed residual**: the figure plots belief and phase-plane change, not a signed prediction error that subtracts \`P(actual observation)\` from the bit value.
 - A 16D vector must alter a decision path to qualify as more than decoration. It now drives the workspace and comb, and the test suite checks that masking or cutting the vector changes model predictions.
 
+## Evidence and negative results
+
+See [Gate 0 result ledger](results/GATE0_2026-10-31.md). In twelve held-out streams, the intact loop affected decisions but scored a worse Brier loss (0.29062) than the cut-read control (0.24998); the analytical Bayesian filter reached 81.93% accuracy versus the learner's 55.86%. **The intended memory architecture has not yet earned a performance advantage.**
+
 ## Verification
 
 \`\`\`bash
