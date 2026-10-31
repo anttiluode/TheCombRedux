@@ -14,3 +14,5 @@ jobs:
         run: node --check engine.js && node --check tests/engine.test.js
       - name: Deterministic mechanism gates
         run: node tests/engine.test.js
+      - name: Twelve-seed matched benchmark
+        run: node benchmark.js
